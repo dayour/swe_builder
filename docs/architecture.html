@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Architecture — SWE_BUILDER</title>
-  <meta name="description" content="System architecture for SWE_BUILDER: hybrid build stack, AI teammate orchestration, knowledge layers, and the end-to-end data flow." />
+  <meta name="description" content="System architecture for SWE_BUILDER: hybrid build stack, SWE-Swarms orchestration, knowledge layers, and the end-to-end data flow." />
   <link rel="canonical" href="https://dayour.github.io/swe_builder/architecture.html" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/main.css" />
@@ -30,8 +30,9 @@
         <a href="getting-started.html">Get Started</a>
         <a href="workflow.html">Workflow</a>
         <a href="architecture.html">Architecture</a>
+        <a href="schema.html">Schema</a>
         <a href="skills.html">Skills</a>
-        <a href="agents.html">Agent Teams</a>
+        <a href="swarms.html">SWE-Swarms</a>
         <a href="tools.html">Tools</a>
         <a href="knowledge.html">Knowledge</a>
         <a href="cli.html">CLI</a>
@@ -56,8 +57,9 @@
     <a href="getting-started.html">Get Started</a>
     <a href="workflow.html">Workflow</a>
     <a href="architecture.html">Architecture</a>
+    <a href="schema.html">Schema</a>
     <a href="skills.html">Skills</a>
-    <a href="agents.html">Agent Teams</a>
+    <a href="swarms.html">SWE-Swarms</a>
     <a href="tools.html">Tools</a>
     <a href="knowledge.html">Knowledge</a>
     <a href="cli.html">CLI</a>
@@ -72,7 +74,10 @@
           <ul class="sidebar-nav">
             <li><a href="#system">System</a></li>
             <li><a href="#hybrid-stack">Hybrid stack</a></li>
-            <li><a href="#agent-teams">Agent Teams</a></li>
+            <li><a href="#swe-swarms">SWE-Swarms</a></li>
+            <li><a href="#canvas-auth">Canvas authentication</a></li>
+            <li><a href="#identity-flow">Identity-bound flow</a></li>
+            <li><a href="#secure-boundary">Secure boundary model</a></li>
             <li><a href="#data-flow">Data flow</a></li>
             <li><a href="#yaml-pipeline">YAML pipeline</a></li>
             <li><a href="#eval-loop">Eval loop</a></li>
@@ -105,7 +110,7 @@ flowchart TB
   API --&gt; FS[(Build-Guides/*.json)]
   Claude --&gt; FS
   Claude --&gt; Skills[13 Workflow Skills]
-  Skills --&gt; Teammates[7 AI Teammates]
+  Skills --&gt; Teammates[7 SWE-Swarms]
   Skills --&gt; Stack[Hybrid Build Stack]
   Stack --&gt; MCS[(Microsoft Copilot Studio)]
         </div>
@@ -153,11 +158,13 @@ flowchart LR
           </tbody>
         </table>
 
-        <h2 id="agent-teams">Agent Teams</h2>
+        <h2 id="swe-swarms">SWE-Swarms</h2>
         <p>
-          You speak to the lead orchestrator. The lead delegates to seven specialists, each with
-          its own context window. Specialists challenge each other. The lead executes only validated
-          artifacts against the hybrid stack.
+          You speak to the lead orchestrator. The lead delegates to seven specialist swarms,
+          each with its own context window. Swarms challenge each other through the shared
+          <code>brief.json</code> schema. The lead executes only validated artifacts against
+          the hybrid stack. See the <a href="swarms.html">SWE-Swarms page</a> for the full
+          coordination model.
         </p>
 
         <div class="mermaid">
@@ -168,7 +175,7 @@ flowchart TB
   Lead --&gt; TE[Topic Engineer]
   Lead --&gt; QA[QA Challenger]
   Lead --&gt; FD[Flow Designer]
-  Lead --&gt; RC[Repo Checker]
+  Lead --&gt; RC[Repo Health Swarm]
   Lead --&gt; RO[Repo Optimizer]
 
   PE &lt;-->|reviews| QA
@@ -180,6 +187,73 @@ flowchart TB
 
   Lead --&gt; Stack[Hybrid Stack]
   Stack --&gt; MCS[(Copilot Studio)]
+        </div>
+
+        <h2 id="canvas-auth">Canvas authentication topology</h2>
+        <p>
+          Every UI surface in SWE_BUILDER is a canvas. All four canvases share one delegated
+          auth token containing identity (Entra OID) and person details. There is no separate
+          credential store and no service principal secret. See the
+          <a href="schema.html#canvases">schema page</a> for the full canvas-to-schema mapping.
+        </p>
+
+        <div class="mermaid">
+flowchart TB
+  U([User]) --&gt; MSAL[MSAL sign-in]
+  MSAL --&gt; T[Single delegated token: oid, name, email, tenant, env, roles]
+  T --&gt; C1[Project Dashboard]
+  T --&gt; C2[Brief Editor]
+  T --&gt; C3[Terminal]
+  T --&gt; C4[Library]
+  C1 -.read/write slice.-&gt; B[(brief.json)]
+  C2 -.read/write slice.-&gt; B
+  C3 -.read/write slice.-&gt; B
+  C4 -.read.-&gt; LIB[(library + templates)]
+  C3 -- delegated token --&gt; PAC[PAC CLI]
+  C3 -- delegated token --&gt; DV[Dataverse]
+  C3 -- delegated token --&gt; DL[Direct Line]
+        </div>
+
+        <h2 id="identity-flow">Identity-bound operation flow</h2>
+        <p>
+          The same token authenticates the canvas, the orchestrator, the swarms, and every
+          downstream MCS call. Person details flow through every operation and land in
+          <code>brief.json.buildStatus.actor</code> for the audit trail.
+        </p>
+
+        <div class="mermaid">
+sequenceDiagram
+  participant U as User
+  participant DASH as Dashboard
+  participant TERM as Terminal
+  participant CC as Claude Code lead
+  participant SW as SWE-Swarms
+  participant SCH as brief.json
+  participant DV as Dataverse / MCS
+
+  U-&gt;&gt;DASH: MSAL sign-in
+  DASH-&gt;&gt;TERM: token shared in session
+  U-&gt;&gt;TERM: /mcs-build OrderAgent
+  TERM-&gt;&gt;CC: spawn with token
+  CC-&gt;&gt;SCH: read
+  CC-&gt;&gt;SW: delegate (token in context)
+  SW-&gt;&gt;SCH: write slices
+  CC-&gt;&gt;SCH: validate
+  CC-&gt;&gt;DV: ops with delegated token
+  CC-&gt;&gt;SCH: write actor + completedSteps
+        </div>
+
+        <h2 id="secure-boundary">Secure-by-design boundary model</h2>
+        <p>
+          Each layer enforces its own validation. There is no trust inheritance. The token must
+          satisfy each layer's policy independently.
+        </p>
+
+        <div class="mermaid">
+flowchart LR
+  C[Canvas: MSAL freshness, no stored secrets] --&gt; S[Schema: JSON Schema validate, field allow lists]
+  S --&gt; A[API: OAuth scope, tenant + env match]
+  A --&gt; M[MCS: Dataverse RBAC, env maker role, DLP]
         </div>
 
         <h2 id="data-flow">Data flow</h2>
@@ -328,7 +402,7 @@ flowchart LR
   app/                     # Dashboard (FastAPI + React + node-pty terminal)
   .claude/
     skills/                # 13 workflow skills
-    agents/                # 7 AI teammate definitions
+    agents/                # 7 SWE-Swarms definitions
     rules/                 # Modular rule files
   knowledge/
     cache/                 # 18 capability cheat sheets
@@ -342,7 +416,7 @@ flowchart LR
   docs/                    # This GitHub Pages site
 </code></pre>
 
-        <p><a class="btn btn-primary" href="tools.html">Explore the tools</a> <a class="btn btn-secondary" href="agents.html">Meet the teammates</a></p>
+        <p><a class="btn btn-primary" href="tools.html">Explore the tools</a> <a class="btn btn-secondary" href="swarms.html">Meet the swarms</a></p>
       </main>
     </div>
   </main>

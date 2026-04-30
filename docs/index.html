@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SWE_BUILDER — Microsoft Copilot Studio agent build automation</title>
-  <meta name="description" content="End-to-end agent build automation for Microsoft Copilot Studio. Hybrid stack with PAC CLI, Dataverse API, Code Editor YAML, Direct Line, and Playwright. AI teammate peer review and eval-driven iteration." />
+  <meta name="description" content="End-to-end agent build automation for Microsoft Copilot Studio. Hybrid stack with PAC CLI, Dataverse API, Code Editor YAML, Direct Line, and Playwright. SWE-Swarms peer review and eval-driven iteration. Schema-first and secure by design." />
   <meta name="theme-color" content="#0d1117" />
   <link rel="canonical" href="https://dayour.github.io/swe_builder/" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SWE_BUILDER — MCS agent build automation" />
-  <meta property="og:description" content="End-to-end agent build automation for Microsoft Copilot Studio. Hybrid stack with PAC CLI, Dataverse API, YAML, Direct Line, Playwright, and AI teammate peer review." />
+  <meta property="og:description" content="End-to-end agent build automation for Microsoft Copilot Studio. Hybrid stack with PAC CLI, Dataverse API, YAML, Direct Line, Playwright, and SWE-Swarms peer review. Schema-first, secure by design." />
   <meta property="og:url" content="https://dayour.github.io/swe_builder/" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -39,8 +39,9 @@
         <a href="getting-started.html">Get Started</a>
         <a href="workflow.html">Workflow</a>
         <a href="architecture.html">Architecture</a>
+        <a href="schema.html">Schema</a>
         <a href="skills.html">Skills</a>
-        <a href="agents.html">Agent Teams</a>
+        <a href="swarms.html">SWE-Swarms</a>
         <a href="tools.html">Tools</a>
         <a href="knowledge.html">Knowledge</a>
         <a href="cli.html">CLI</a>
@@ -65,8 +66,9 @@
     <a href="getting-started.html">Get Started</a>
     <a href="workflow.html">Workflow</a>
     <a href="architecture.html">Architecture</a>
+    <a href="schema.html">Schema</a>
     <a href="skills.html">Skills</a>
-    <a href="agents.html">Agent Teams</a>
+    <a href="swarms.html">SWE-Swarms</a>
     <a href="tools.html">Tools</a>
     <a href="knowledge.html">Knowledge</a>
     <a href="cli.html">CLI</a>
@@ -82,7 +84,8 @@
           SWE_BUILDER automates the full Copilot Studio agent lifecycle: data intake, research,
           architecture, build, evaluation, and an automated fix loop. A hybrid stack combines
           PAC CLI, Dataverse API, Code Editor YAML, Direct Line, and Playwright, coordinated by
-          Claude Code with seven AI teammates that peer-review every step.
+          Claude Code with seven SWE-Swarms that peer-review every step. Designed schema-first
+          and secure by design.
         </p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="getting-started.html">Get started</a>
@@ -91,8 +94,9 @@
         </div>
         <div class="hero-meta">
           <span><strong>13</strong> workflow skills</span>
-          <span><strong>7</strong> AI teammates</span>
+          <span><strong>7</strong> SWE-Swarms</span>
           <span><strong>5</strong> tool layers</span>
+          <span><strong>4</strong> identity-bound canvases</span>
           <span><strong>18</strong> capability cheat sheets</span>
           <span><strong>357</strong> validated YAML node types</span>
           <span><strong>MIT</strong> licensed</span>
@@ -128,9 +132,9 @@
             <p>PAC CLI for lifecycle, Dataverse API for config, Code Editor YAML for topics, Direct Line for tests, Playwright only for UI-only operations.</p>
           </div>
           <div class="card">
-            <span class="label">AI Teammates</span>
+            <span class="label">SWE-Swarms</span>
             <h3>Built-in peer review</h3>
-            <p>Seven specialist sub-agents (research, prompt, topic, QA, repo-checker, flow-designer, repo-optimizer) challenge each other before any change reaches Copilot Studio.</p>
+            <p>Seven specialist swarms (research, prompt, topic, QA, repo-health, flow-designer, repo-optimizer) coordinate through the shared schema and challenge each other before any change reaches Copilot Studio.</p>
           </div>
           <div class="card">
             <span class="label">Multi-Agent First</span>
@@ -141,6 +145,21 @@
             <span class="label">Continuous Learning</span>
             <h3>Every build improves the next</h3>
             <p>A learnings index captures insights with confirmed counts and staleness flags. Future research consults them without overriding fresh decisions.</p>
+          </div>
+          <div class="card">
+            <span class="label">Schema-First</span>
+            <h3>brief.json is the contract</h3>
+            <p>One canonical schema. Every canvas, every swarm, and every operation reads and writes through it. JSON Schema validates at every boundary. The schema is open-source and shareable.</p>
+          </div>
+          <div class="card">
+            <span class="label">Secure by Design</span>
+            <h3>Identity-bound canvases</h3>
+            <p>Four canvases share one delegated auth token containing identity (Entra OID) and person details. No service principal secrets. Single-point revocation through Entra.</p>
+          </div>
+          <div class="card">
+            <span class="label">Open-Source Library</span>
+            <h3>Schema, templates, framework</h3>
+            <p>Library of shareable agent designs. Templates that pass validation on day one. A pluggable framework where every layer (canvas, swarm, orchestrator) is independently swappable.</p>
           </div>
         </div>
 
@@ -229,41 +248,42 @@ swe_builder start
           </tbody>
         </table>
 
-        <h2 id="agent-teams">AI teammates</h2>
+        <h2 id="swe-swarms">SWE-Swarms</h2>
         <p>
-          You speak to the lead orchestrator. Behind it, seven specialists collaborate, debate, and
-          execute. The lead delegates and coordinates; teammates challenge each other and produce
-          validated artifacts; the lead executes them via the hybrid stack.
+          You speak to the lead orchestrator. Behind it, seven specialist swarms collaborate,
+          debate, and execute. The lead delegates and coordinates; swarms challenge each other
+          through the shared <code>brief.json</code> schema and produce validated artifacts; the
+          lead executes them via the hybrid stack.
         </p>
         <div class="grid grid-3">
-          <a class="card card-link" href="agents.html#research-analyst">
+          <a class="card card-link" href="swarms.html#research-analyst">
             <span class="label">Research</span>
             <h3>Research Analyst</h3>
             <p>Discovers MCS capabilities across MS Learn, web, community, and live UI. Prevents false limitation claims.</p>
           </a>
-          <a class="card card-link" href="agents.html#prompt-engineer">
+          <a class="card card-link" href="swarms.html#prompt-engineer">
             <span class="label">Instructions</span>
             <h3>Prompt Engineer</h3>
             <p>Authors agent system prompts, custom prompts, and reviews skill files when output quality drops.</p>
           </a>
-          <a class="card card-link" href="agents.html#topic-engineer">
+          <a class="card card-link" href="swarms.html#topic-engineer">
             <span class="label">YAML</span>
             <h3>Topic Engineer</h3>
             <p>Generates and validates topic YAML, adaptive cards, trigger phrases, and channel-safe rendering.</p>
           </a>
-          <a class="card card-link" href="agents.html#qa-challenger">
+          <a class="card card-link" href="swarms.html#qa-challenger">
             <span class="label">Quality</span>
             <h3>QA Challenger</h3>
             <p>Adversarial reviewer. Tests every claim, validates cross-references, finds gaps before they hit MCS.</p>
           </a>
-          <a class="card card-link" href="agents.html#flow-designer">
+          <a class="card card-link" href="swarms.html#flow-designer">
             <span class="label">Power Automate</span>
             <h3>Flow Designer</h3>
             <p>Designs Power Automate flow specifications from brief capabilities. Writes specs only, never executes.</p>
           </a>
-          <a class="card card-link" href="agents.html#repo-checker">
+          <a class="card card-link" href="swarms.html#repo-checker">
             <span class="label">Sync</span>
-            <h3>Repo Checker</h3>
+            <h3>Repo Health Swarm</h3>
             <p>Cross-reference and sync validator. Finds broken paths, stale docs, and drift after any reorg.</p>
           </a>
         </div>

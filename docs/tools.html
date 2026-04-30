@@ -30,8 +30,9 @@
         <a href="getting-started.html">Get Started</a>
         <a href="workflow.html">Workflow</a>
         <a href="architecture.html">Architecture</a>
+        <a href="schema.html">Schema</a>
         <a href="skills.html">Skills</a>
-        <a href="agents.html">Agent Teams</a>
+        <a href="swarms.html">SWE-Swarms</a>
         <a href="tools.html">Tools</a>
         <a href="knowledge.html">Knowledge</a>
         <a href="cli.html">CLI</a>
@@ -56,8 +57,9 @@
     <a href="getting-started.html">Get Started</a>
     <a href="workflow.html">Workflow</a>
     <a href="architecture.html">Architecture</a>
+    <a href="schema.html">Schema</a>
     <a href="skills.html">Skills</a>
-    <a href="agents.html">Agent Teams</a>
+    <a href="swarms.html">SWE-Swarms</a>
     <a href="tools.html">Tools</a>
     <a href="knowledge.html">Knowledge</a>
     <a href="cli.html">CLI</a>
@@ -94,6 +96,14 @@
             <li><a href="#flow-composer">flow-composer</a></li>
             <li><a href="#mcs-lsp">mcs-lsp</a></li>
             <li><a href="#dataverse-helper">dataverse-helper</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">OSS layers</div>
+          <ul class="sidebar-nav">
+            <li><a href="#oss-library">Library</a></li>
+            <li><a href="#oss-templates">Templates</a></li>
+            <li><a href="#oss-framework">Framework</a></li>
           </ul>
         </div>
       </aside>
@@ -222,7 +232,73 @@ node tools/multi-model-review.js --target instructions --file brief.json
           <li><strong>pre-push</strong>: Auto-updates om-cli from the upstream ObjectModel source.</li>
         </ul>
 
-        <p><a class="btn btn-primary" href="cli.html">CLI command reference</a> <a class="btn btn-secondary" href="knowledge.html">Knowledge layers</a></p>
+        <h2 id="oss-shareable">Open-source shareable layers</h2>
+        <p>
+          The tools above are the operational surface. Beneath them sit three open-source
+          layers that make the system shareable: the <strong>library</strong> (instances),
+          the <strong>templates</strong> (scaffolds), and the <strong>framework</strong>
+          (architecture). All three are coordinated through the same
+          <a href="schema.html">canonical schema</a> and the same identity-bound auth token.
+        </p>
+
+        <h3 id="oss-library">Library: shareable schema instances</h3>
+        <p>
+          The solution library is a community of <code>brief.json</code> instances, each one
+          a complete agent design. Browse, fork, or contribute. The library turns
+          schema-first into something social.
+        </p>
+        <ul>
+          <li>30+ cached snapshots in <code>knowledge/solutions/</code></li>
+          <li>Each entry: <code>brief.json</code>, <code>topics/</code>, <code>evals.csv</code></li>
+          <li>Searchable by industry, capability, integration pattern</li>
+          <li>Browse via <code>tools/solution-library.js</code> (CLI) or the Library canvas</li>
+          <li>Upload to team SharePoint with one command</li>
+        </ul>
+
+        <h3 id="oss-templates">Templates: schema scaffolds</h3>
+        <p>
+          The <code>templates/</code> directory holds the canonical schema and the starter
+          scaffolds. New projects begin from a template. Templates are versioned alongside
+          the schema and pass validation on day one.
+        </p>
+<pre><code class="language-text">templates/
+  brief.json                # Canonical schema scaffold (the contract)
+  topics/                   # Reusable topic YAML scaffolds
+  evals/                    # Eval set scaffolds (5 default sets)
+  flows/                    # Power Automate flow scaffolds
+</code></pre>
+        <ul>
+          <li>JSON Schema lives at <code>templates/brief.json</code></li>
+          <li>Forkable, MIT licensed</li>
+          <li>Validators in <code>tools/</code> (<code>om-cli</code>, <code>gen-constraints.py</code>, <code>semantic-gates.py</code>)</li>
+          <li>Compatible with any standard JSON Schema validator</li>
+        </ul>
+
+        <h3 id="oss-framework">Framework: the assembled stack</h3>
+        <p>
+          The framework is the assembled stack: schema + canvases + swarms + lead orchestrator
+          + hybrid execution layer. Every layer is independently swappable. Treat it as a
+          reference implementation for schema-first, identity-bound agent tooling.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Component</th><th>Replaceable with</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Schema</td><td><code>templates/brief.json</code></td><td>Any JSON Schema</td></tr>
+            <tr><td>Canvas</td><td>React + Vite SPA (4 canvases)</td><td>Any framework that consumes schema slices</td></tr>
+            <tr><td>Swarms</td><td>Claude Code sub-agents</td><td>AutoGen, Semantic Kernel, custom orchestrators</td></tr>
+            <tr><td>Orchestrator</td><td>Claude Code lead</td><td>Any model with tool calling and file access</td></tr>
+            <tr><td>Execution</td><td>PAC + Dataverse + Direct Line + Playwright</td><td>Any MCS automation surface</td></tr>
+            <tr><td>Identity</td><td>MSAL + Entra ID</td><td>Any OIDC provider issuing delegated tokens</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <a class="btn btn-primary" href="schema.html">Read the schema-first architecture</a>
+          <a class="btn btn-secondary" href="cli.html">CLI command reference</a>
+          <a class="btn btn-secondary" href="knowledge.html">Knowledge layers</a>
+        </p>
       </main>
     </div>
   </main>

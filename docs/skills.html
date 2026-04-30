@@ -30,8 +30,9 @@
         <a href="getting-started.html">Get Started</a>
         <a href="workflow.html">Workflow</a>
         <a href="architecture.html">Architecture</a>
+        <a href="schema.html">Schema</a>
         <a href="skills.html">Skills</a>
-        <a href="agents.html">Agent Teams</a>
+        <a href="swarms.html">SWE-Swarms</a>
         <a href="tools.html">Tools</a>
         <a href="knowledge.html">Knowledge</a>
         <a href="cli.html">CLI</a>
@@ -56,8 +57,9 @@
     <a href="getting-started.html">Get Started</a>
     <a href="workflow.html">Workflow</a>
     <a href="architecture.html">Architecture</a>
+    <a href="schema.html">Schema</a>
     <a href="skills.html">Skills</a>
-    <a href="agents.html">Agent Teams</a>
+    <a href="swarms.html">SWE-Swarms</a>
     <a href="tools.html">Tools</a>
     <a href="knowledge.html">Knowledge</a>
     <a href="cli.html">CLI</a>
@@ -106,7 +108,7 @@
           <p>Create the project folder structure and a starter <code>brief.json</code>. Detects existing SDR documents in the folder and converts <code>.docx</code> to <code>.md</code> via pandoc.</p>
 <pre><code class="language-bash">/mcs-init MyAgent
 </code></pre>
-          <p><strong>Reads</strong>: project name. <strong>Writes</strong>: <code>Build-Guides/MyAgent/{docs,agents}/</code> and starter brief. <strong>Teammates</strong>: none.</p>
+          <p><strong>Reads</strong>: project name. <strong>Writes</strong>: <code>Build-Guides/MyAgent/{docs,agents}/</code> and starter brief. <strong>Swarms</strong>: none.</p>
         </article>
 
         <article class="skill" id="mcs-context">
@@ -123,7 +125,7 @@
 <pre><code class="language-bash">/mcs-research MyAgent
 /mcs-research MyAgent agent-name
 </code></pre>
-          <p><strong>Reads</strong>: <code>docs/</code>, <code>customer-context.md</code>, <code>knowledge/cache/</code>, <code>knowledge/learnings/</code>. <strong>Writes</strong>: enriched <code>brief.json</code>, <code>evals.csv</code>. <strong>Teammates</strong>: Research Analyst (on demand), Prompt Engineer, Topic Engineer, QA Challenger.</p>
+          <p><strong>Reads</strong>: <code>docs/</code>, <code>customer-context.md</code>, <code>knowledge/cache/</code>, <code>knowledge/learnings/</code>. <strong>Writes</strong>: enriched <code>brief.json</code>, <code>evals.csv</code>. <strong>Swarms</strong>: Research Analyst (on demand), Prompt Engineer, Topic Engineer, QA Challenger.</p>
         </article>
 
         <article class="skill" id="mcs-build">
@@ -131,7 +133,7 @@
           <p>Construct and publish the agent in Copilot Studio using the hybrid stack. Includes account/environment gate, find-or-create logic, step-level checkpoints for resume, MVP filtering, eval-driven loop (critical gate, per-capability iteration, regression suite), and a QA validation gate before report.</p>
 <pre><code class="language-bash">/mcs-build MyAgent agent-name
 </code></pre>
-          <p><strong>Reads</strong>: <code>brief.json</code>. <strong>Writes</strong>: <code>brief.json.buildStatus</code>, MCS agent. <strong>Teammates</strong>: Topic Engineer, QA Challenger (plus Research Analyst and Prompt Engineer on demand).</p>
+          <p><strong>Reads</strong>: <code>brief.json</code>. <strong>Writes</strong>: <code>brief.json.buildStatus</code>, MCS agent. <strong>Swarms</strong>: Topic Engineer, QA Challenger (plus Research Analyst and Prompt Engineer on demand).</p>
         </article>
 
         <article class="skill" id="mcs-eval">
@@ -141,7 +143,7 @@
 /mcs-eval MyAgent agent-name --set critical,functional
 /mcs-eval MyAgent agent-name --native
 </code></pre>
-          <p><strong>Reads</strong>: <code>brief.json</code> evalSets. <strong>Writes</strong>: <code>brief.json.evalSets[].tests[].lastResult</code>, <code>evals-results.json</code>. <strong>Teammates</strong>: QA Challenger.</p>
+          <p><strong>Reads</strong>: <code>brief.json</code> evalSets. <strong>Writes</strong>: <code>brief.json.evalSets[].tests[].lastResult</code>, <code>evals-results.json</code>. <strong>Swarms</strong>: QA Challenger.</p>
         </article>
 
         <article class="skill" id="mcs-fix">
@@ -149,7 +151,7 @@
           <p>Post-deployment fix loop. QA Challenger classifies failures into root causes, then PE and TE patch in parallel and re-evaluate. For initial build iteration, use <code>/mcs-build</code> (which has its own internal fix loop).</p>
 <pre><code class="language-bash">/mcs-fix MyAgent agent-name
 </code></pre>
-          <p><strong>Reads</strong>: <code>brief.json</code> (failing eval tests). <strong>Writes</strong>: <code>brief.json</code> (instructions, topics, fix history), MCS agent updates. <strong>Teammates</strong>: QA Challenger, Prompt Engineer, Topic Engineer.</p>
+          <p><strong>Reads</strong>: <code>brief.json</code> (failing eval tests). <strong>Writes</strong>: <code>brief.json</code> (instructions, topics, fix history), MCS agent updates. <strong>Swarms</strong>: QA Challenger, Prompt Engineer, Topic Engineer.</p>
         </article>
 
         <article class="skill" id="mcs-deploy">
@@ -157,7 +159,7 @@
           <p>Promote agent dev to prod. Two modes: agent-level (fast, replicate-agent.js) and solution-level (PAC CLI export and import, ALM-ready). Includes pre-deploy validation, connection mapping, and post-deploy smoke test.</p>
 <pre><code class="language-bash">/mcs-deploy MyAgent agent-name
 </code></pre>
-          <p><strong>Reads</strong>: <code>brief.json</code>. <strong>Writes</strong>: <code>deployment-report.md</code>. <strong>Teammates</strong>: none.</p>
+          <p><strong>Reads</strong>: <code>brief.json</code>. <strong>Writes</strong>: <code>deployment-report.md</code>. <strong>Swarms</strong>: none.</p>
         </article>
 
         <article class="skill" id="mcs-report">
@@ -191,7 +193,7 @@
 
         <article class="skill" id="mcs-library">
           <h3><code>/mcs-library</code> <span class="badge badge-cyan">Library</span></h3>
-          <p>Browse, search, analyze, and contribute to the team's SharePoint solution library. Uses agent teams for intelligent tagging and pattern extraction.</p>
+          <p>Browse, search, analyze, and contribute to the team's SharePoint solution library. Uses SWE-Swarms for intelligent tagging and pattern extraction.</p>
 <pre><code class="language-bash">/mcs-library list
 /mcs-library search "knowledge agent"
 /mcs-library upload MyAgent agent-name
@@ -210,7 +212,7 @@
           <p>Conversational feature suggestion. Same dialog flow as <code>/bug</code>. Creates an ADO Feature work item.</p>
         </article>
 
-        <p><a class="btn btn-primary" href="cli.html">See all CLI commands</a> <a class="btn btn-secondary" href="agents.html">Meet the AI teammates</a></p>
+        <p><a class="btn btn-primary" href="cli.html">See all CLI commands</a> <a class="btn btn-secondary" href="swarms.html">Meet the SWE-Swarms</a></p>
       </main>
     </div>
   </main>
