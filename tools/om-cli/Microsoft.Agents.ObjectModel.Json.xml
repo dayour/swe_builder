@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Agents.ObjectModel.Json</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Agents.ObjectModel.Json.Converters.ImmutableDictionaryConverter`2">
+            <summary>
+            Converter class to handle serialization of ImmutableDictionaries where the key is not a native .NET type.  
+            https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-supported-collection-types?pivots=dotnet-6-0#supported-key-types
+            </summary>
+            <typeparam name="TKey">The key type.  If this is a native type, this converter is not necessary.</typeparam>
+            <typeparam name="TValue">The value type.</typeparam>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Json.Converters.ImmutableDictionaryConverter`2.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Reads the serialized json object and converts to the object representation.
+            </summary>
+            <param name="reader">The json reader.</param>
+            <param name="typeToConvert">The type to convert.</param>
+            <param name="options">The json serialization options.</param>
+            <returns>Returns the deserialized dictionary.</returns>
+            <exception cref="T:System.Text.Json.JsonException"></exception>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Json.Converters.ImmutableDictionaryConverter`2.Write(System.Text.Json.Utf8JsonWriter,System.Collections.Immutable.ImmutableDictionary{`0,`1},System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Writes the dictionary to serialized json format.
+            </summary>
+            <param name="writer">The writer.</param>
+            <param name="value">The dictionary object.</param>
+            <param name="options">serialization options</param>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Json.Converters.ImmutableStackConverter">
+            <summary>
+            Avoids reversing values in a Stack when serializing to JSON
+            https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-converters-how-to?pivots=dotnet-6-0#support-round-trip-for-stackt
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Json.Internal.GreenWriter.PrefixExpression(System.String)">
+            <summary>
+            All expressions should start with = normally
+            so we can distinguish them from strings. 
+            Forcing this on serialization in case if somebody has created the expression without =.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Internal.JsonConverters.EnumConverter`1">
+            <summary>
+            Converter which allows json to be expression to object or static object.
+            </summary>
+            <typeparam name="T">The enum type to construct.</typeparam>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.RetrieveMaximumRowVersionResponseConverter">
+            <summary>
+            Converter for Dataverse Rowversion response that handles writes to the field as string, but parses it as a long
+            </summary>
+        </member>
+    </members>
+</doc>

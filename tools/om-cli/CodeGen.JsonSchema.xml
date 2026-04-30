@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeGen.JsonSchema</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Agents.CodeGen.JsonSchema.JsonElementToObjectConverter">
+            <summary>
+            Converts JsonElement to primitive types for object properties
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.CodeGen.JsonSchema.JsonSchema">
+            <summary>
+            Represents a JSON Schema definition
+            Uses System.Text.Json serialization with custom converter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.CodeGen.JsonSchema.JsonSchemaConverter">
+            <summary>
+            Custom JSON converter for JsonSchema that replicates Newtonsoft.Json's ShouldSerialize pattern.
+            Omits empty collections and null properties from serialization.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.CodeGen.JsonSchema.JsonSchemaMsgPack">
+            <summary>
+            MessagePack-specific contract for JSON Schema serialization
+            Shared between CodeGen and CLI projects for binary schema transfer
+            </summary>
+        </member>
+    </members>
+</doc>

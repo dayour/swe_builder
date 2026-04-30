@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Agents.ObjectModel.PowerFx</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Agents.ObjectModel.PowerFx.ExpressionEngineProvider">
+            <summary>
+            A container that allows for RecalcEngine compiler customization and caching.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Agents.ObjectModel.PowerFx.ExpressionEngineProvider.RecalcEngineCache._namingConflicts">
+            <summary>
+            Key: Name of the option set causing a naming conflict
+            Value: true if the option set conflicts with a system name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.PowerFx.ExpressionEngineProvider.RecalcEngineCache.TryGetOptionSet(Microsoft.Agents.ObjectModel.OptionSetDataType,Microsoft.PowerFx.OptionSet@)">
+            <inheritdoc cref="M:Microsoft.Agents.ObjectModel.PowerFx.IOptionSetCache.TryGetOptionSet(Microsoft.Agents.ObjectModel.OptionSetDataType,Microsoft.PowerFx.OptionSet@)"/>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.PowerFx.ExpressionEngineProvider.RecalcEngineCache.CheckNameCollision(System.String)">
+            <inheritdoc cref="M:Microsoft.Agents.ObjectModel.PowerFx.IOptionSetCache.CheckNameCollision(System.String)"/>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.PowerFx.FileDataContent">
+            <summary>
+            PowerFX BlobContent version wrapping a Copilot Studio File Reference object
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.PowerFx.Visitors.AmbiguousPath">
+            <summary>
+            Represents a potentially ambiguous path property path
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.PowerFx.Visitors.FindDependenciesVisitor">
+            <summary>
+            Collects all the referenced state as <see cref="T:Microsoft.PowerFx.Core.Utils.DPath"/> objects
+            for a given formula without a binder. This can be used to determine
+            the order in which to resolve formulas.
+            </summary>
+            <remarks>
+             We collect and return a list of paths for any given expression.
+             Certain functions create multiple valid state paths from a single node.
+             Example: If (A, B, C).Name references both B.Name and C.Name depending on the value of A.
+             
+             Operations such as With, As, or Sum create scopes, which are stored in the dictionary that is 
+             input to the visitor. As an example, the With({x: 5}, x) does not reference any external state,
+             since x is defined within the expression.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.PowerFx.Visitors.PowerFxValueToDataValueConverterWithoutTimeZone.#ctor(Microsoft.Agents.ObjectModel.Expressions.IExpressionCheckerOperationContext)">
+            <summary>
+            Do not use, instead, use the static <see cref="M:Microsoft.Agents.ObjectModel.PowerFx.Visitors.PowerFxValueToDataValueConverterWithoutTimeZone.Convert(Microsoft.PowerFx.Types.FormulaValue,Microsoft.Agents.ObjectModel.Expressions.IExpressionCheckerOperationContext)"/> method.
+            </summary>
+            <remarks>
+            This constructor is made private, since this class is not thread safe and should be newed up
+            for each call or cached per thread.
+            </remarks>
+        </member>
+    </members>
+</doc>

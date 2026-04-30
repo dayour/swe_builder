@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ObjectModel.Cli.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.DataModel.JsonSchemaMsgPackExtensions">
+            <summary>
+            Extension methods for converting MessagePack schemas to CLI JsonSchema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.DataModel.JsonSchemaMsgPackExtensions.ToJsonSchema(Microsoft.Agents.CodeGen.JsonSchema.JsonSchemaMsgPack)">
+            <summary>
+            Converts this MessagePack schema to a JSON/YAML-compatible schema
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.SchemaRepository">
+            <summary>
+            Repository for JSON schemas loaded from embedded MessagePack resources
+            </summary>
+        </member>
+        <member name="P:Microsoft.Agents.ObjectModel.Cli.SchemaRepository.CopilotStudioSchema">
+            <summary>
+            CopilotStudio JSON Schema - deserialized from embedded MessagePack
+            </summary>
+        </member>
+        <member name="P:Microsoft.Agents.ObjectModel.Cli.SchemaRepository.FoundrySchema">
+            <summary>
+            Foundry JSON Schema - deserialized from embedded MessagePack
+            </summary>
+        </member>
+        <member name="P:Microsoft.Agents.ObjectModel.Cli.SchemaRepository.SydneySchema">
+            <summary>
+            Sydney JSON Schema - deserialized from embedded MessagePack
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer">
+            <summary>
+            Analyzes type composition by examining properties and their types
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer.AnalyzeComposition(System.String,System.Nullable{System.Int32},System.Boolean)">
+            <summary>
+            Analyzes the composition of a type
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer.CollectAllProperties(System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Collects all properties including those from base types
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer.AnalyzeProperty(System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,System.Int32,System.Nullable{System.Int32},System.Boolean,System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Analyzes a property and its type
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer.IsAbstractType(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Checks if a type is abstract
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.CompositionAnalyzer.ExtractTypeNameFromRef(System.String)">
+            <summary>
+            Extracts type name from a $ref string
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.CompositionInfo">
+            <summary>
+            Information about a type's composition
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.PropertyInfo">
+            <summary>
+            Information about a property
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider">
+            <summary>
+            Provides context information about the current working environment
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider.#ctor(System.String)">
+            <summary>
+            Creates a new ContextProvider for the specified working directory
+            </summary>
+        </member>
+        <member name="P:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider.WorkingDirectory">
+            <summary>
+            Gets the current working directory
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider.GetTargetProduct">
+            <summary>
+            Detects the target product from the current context
+            </summary>
+            <returns>The detected target product (copilot-studio, foundry, or sydney)</returns>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider.HasCopilotStudioAgent">
+            <summary>
+            Checks if the current directory contains a Copilot Studio agent
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.ContextProvider.GetAgentRootDirectory">
+            <summary>
+            Gets the agent root directory (if in an agent context)
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder">
+            <summary>
+            Builds inheritance hierarchies for types
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.BuildHierarchy(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Builds a hierarchy tree for a given type
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.BuildAncestors(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Builds the ancestor chain (base types going up)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.BuildDescendants(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Builds the descendant tree (derived types going down)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.CollectDescendants(System.String,System.Int32,System.Int32,System.Collections.Generic.List{Microsoft.Agents.ObjectModel.Cli.Services.HierarchyNode},System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Recursively collects descendants
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.IsAbstractType(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Checks if a type is abstract
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyBuilder.CountProperties(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Counts the number of properties in a type
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyInfo">
+            <summary>
+            Represents a complete hierarchy structure
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.HierarchyNode">
+            <summary>
+            Represents a single node in the hierarchy
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.LS.MarkResolver.#ctor(System.String)">
+            <summary>
+            Build a new instance of MarkResolver, utility to optimize conversion from "Line+Column" to "Index".
+            </summary>
+            <param name="text">Text string.</param>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.LS.MarkResolver.GetRangesInLines(System.Int32,System.Int32)">
+            <summary>
+            Converts a start position and length to in-bounds ranges across lines. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.LS.ObjectModelExtensions.FindElementBySyntaxUri(Microsoft.Agents.ObjectModel.BotElement,System.Uri)">
+            <summary>
+            Given an element parsed from a file, find the matching element in the list of descendant of a BotDefinition.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer">
+            <summary>
+            Indexes schema definitions for fast lookup and relationship traversal
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetTypeDefinition(System.String)">
+            <summary>
+            Gets a type definition by name
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetTypeDefinitionByNameOrKind(System.String)">
+            <summary>
+            Gets a type definition by either type name or kind value.
+            Tries type name first, then kind value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetTypeNameFromNameOrKind(System.String)">
+            <summary>
+            Gets the actual type name from either type name or kind value.
+            Returns the properly cased type name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetBaseType(System.String)">
+            <summary>
+            Gets the base type name for a given type
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetDerivedTypes(System.String)">
+            <summary>
+            Gets all types that derive from the given type
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.GetAllTypeDefinitions">
+            <summary>
+            Gets all type definitions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.ExtractTypeNameFromRef(System.String)">
+            <summary>
+            Extracts type name from a $ref string
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.ExtractKindValue(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Extracts the kind value (const) from a schema's kind property
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer.BuildIndexes">
+            <summary>
+            Builds indexes for fast lookup
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.SchemaLoader">
+            <summary>
+            Loads JSON schemas from the schema repository with lazy initialization
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaLoader.GetSchema(System.String)">
+            <summary>
+            Gets a schema by target product name (lazy loaded on first access)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.SchemaLoader.GetAvailableProducts">
+            <summary>
+            Gets all available target products
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Services.Validation.ValidateYaml(System.String)">
+            <summary>
+            Validates YAML content against the schema by deserializing it and collecting diagnostics.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Services.Diagnostic">
+            <summary>
+            Represents a validation diagnostic (error, warning, or info)
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,58 @@
+#!/bin/sh
+#
+# Pre-commit hook — protects core MCS Agent Builder files.
+# Users should only modify Build-Guides/ (gitignored) and personal configs.
+# Changes to core engine files should go through ADO work items/PRs.
+#
+# Bypass: MCS_CORE_DEV=1 git commit ...
+
+# Auto-bypass for repo owner (use git var to catch auto-detected emails too)
+COMMITTER_EMAIL=$(git var GIT_COMMITTER_IDENT 2>/dev/null | sed 's/.*<\(.*\)>.*/\1/')
+case "$COMMITTER_EMAIL" in
+  kimdennis@microsoft.com|dennis@testtesttoltest*|admin@M365CPI*)
+    exit 0 ;;
+esac
+
+if [ "$MCS_CORE_DEV" = "1" ]; then
+  exit 0
+fi
+
+REPO_URL="https://dev.azure.com/powercatteam/_git/FDE"
+
+# Protected path prefixes and exact files
+PROTECTED_DIRS="app/ knowledge/ tools/ .claude/ .github/ templates/"
+PROTECTED_FILES="start.js package.json package-lock.json CLAUDE.md README.md"
+
+blocked=""
+
+for file in $(git diff --cached --name-only --diff-filter=ACMR); do
+  # Check directory prefixes
+  for dir in $PROTECTED_DIRS; do
+    case "$file" in
+      "$dir"*) blocked="$blocked  $file\n"; break ;;
+    esac
+  done
+
+  # Check exact file matches
+  for pf in $PROTECTED_FILES; do
+    if [ "$file" = "$pf" ]; then
+      blocked="$blocked  $file\n"
+      break
+    fi
+  done
+done
+
+if [ -n "$blocked" ]; then
+  echo ""
+  echo "BLOCKED: The following core files are protected:"
+  printf "$blocked"
+  echo ""
+  echo "To request changes, file a work item in ADO:"
+  echo "  ${REPO_URL}"
+  echo ""
+  echo "Authorized developers: set MCS_CORE_DEV=1 to bypass."
+  echo ""
+  exit 1
+fi
+
+exit 0

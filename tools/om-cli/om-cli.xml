@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>om-cli</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.CompositionCommand">
+            <summary>
+            Implements the 'composition' command to show type composition
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.ExamplesCommand">
+            <summary>
+            Implements the 'examples' command to retrieve usage examples for types
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.HierarchyCommand">
+            <summary>
+            Implements the 'hierarchy' command to show inheritance relationships
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.ListCommand">
+            <summary>
+            Implements the 'list' command to list all available types
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.ListCommand.IsAbstractType(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Checks if a type is abstract
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.ListCommand.GetDisplayName(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Gets the display name (title) from a schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.ListCommand.SortTypes(System.Collections.Generic.List{Microsoft.Agents.ObjectModel.Cli.Commands.TypeInfo},System.String)">
+            <summary>
+            Sorts the type list based on the specified field
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.TypeInfo">
+            <summary>
+            Type information for list output
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand">
+            <summary>
+            Implements the 'schema' command to retrieve type definitions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.ExecuteGetAllDefinitions(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer,System.String,System.Boolean,System.String)">
+            <summary>
+            Returns all type definitions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.MergeBaseProperties(System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer)">
+            <summary>
+            Merges properties from base classes into the type definition
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.CloneJsonSchema(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Deep clones a JsonSchema object using JSON serialization
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.CollectReferencedDefinitions(System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer,System.Boolean)">
+            <summary>
+            Collects all referenced definitions and adds them to x-referenced-definitions
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.CollectReferencesFromSchema(System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer,System.Collections.Generic.Dictionary{System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema},System.Collections.Generic.HashSet{System.String},System.Boolean)">
+            <summary>
+            Recursively collects all type references from a schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.CollectReferencesFromProperty(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer,System.Collections.Generic.Dictionary{System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema},System.Collections.Generic.HashSet{System.String},System.Boolean)">
+            <summary>
+            Collects references from a property schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.AddReferencedType(System.String,Microsoft.Agents.ObjectModel.Cli.Services.SchemaIndexer,System.Collections.Generic.Dictionary{System.String,Microsoft.Agents.CodeGen.JsonSchema.JsonSchema},System.Collections.Generic.HashSet{System.String},System.Boolean)">
+            <summary>
+            Adds a referenced type and all its derived types if abstract
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.IsAbstractType(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Checks if a type is abstract by looking for x-abstract property
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SchemaCommand.ExtractTypeNameFromRef(System.String)">
+            <summary>
+            Extracts type name from a $ref string (e.g., "#/definitions/SendActivity" -> "SendActivity")
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand">
+            <summary>
+            Implements the 'search' command to search for types by name pattern
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand.ConvertWildcardToRegex(System.String)">
+            <summary>
+            Converts a wildcard pattern (*, ?) to a regex pattern
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand.IsAbstractType(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Checks if a type is abstract
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand.GetDisplayName(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Gets the display name (title) from a schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand.GetDescription(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Gets the description from a schema
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Commands.SearchCommand.GetKind(Microsoft.Agents.CodeGen.JsonSchema.JsonSchema)">
+            <summary>
+            Gets the kind value from a schema
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.SearchResult">
+            <summary>
+            Search result information
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Commands.ValidateCommand">
+            <summary>
+            Implements the 'validate' command to validate YAML content against the schema
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Formatters.CompositionTreeFormatter">
+            <summary>
+            Formats composition information as an ASCII tree
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Formatters.CompositionTreeFormatter.Format(Microsoft.Agents.ObjectModel.Cli.Services.CompositionInfo)">
+            <summary>
+            Formats composition info as an ASCII tree
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Formatters.CompositionTreeFormatter.FormatProperty(Microsoft.Agents.ObjectModel.Cli.Services.PropertyInfo,System.Text.StringBuilder,System.String,System.Boolean)">
+            <summary>
+            Formats a property and its nested properties
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Formatters.CompositionTreeFormatter.ExtractBaseTypeName(System.String)">
+            <summary>
+            Extracts the base type name from a type string (removes [] suffix)
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Formatters.InheritanceTreeFormatter">
+            <summary>
+            Formats hierarchy information as an ASCII inheritance tree
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Formatters.InheritanceTreeFormatter.Format(Microsoft.Agents.ObjectModel.Cli.Services.HierarchyInfo,System.Boolean)">
+            <summary>
+            Formats a hierarchy as an ASCII tree
+            </summary>
+        </member>
+        <member name="M:Microsoft.Agents.ObjectModel.Cli.Formatters.InheritanceTreeFormatter.BuildDescendantTree(System.String,System.Collections.Generic.List{Microsoft.Agents.ObjectModel.Cli.Services.HierarchyNode},System.Text.StringBuilder,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            Recursively builds the descendant tree
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Formatters.JsonFormatter">
+            <summary>
+            Formats output as JSON with optional indentation
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Formatters.JsonIgnoreTypeInspector">
+            <summary>
+            Type inspector that respects [JsonIgnore] attributes from System.Text.Json
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.Formatters.YamlFormatter">
+            <summary>
+            Formats output as YAML
+            </summary>
+        </member>
+        <member name="T:Microsoft.Agents.ObjectModel.Cli.TestSchemaRepository">
+            <summary>
+            Test class to demonstrate that SchemaRepository is generated at build time
+            </summary>
+        </member>
+    </members>
+</doc>

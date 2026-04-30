@@ -1,0 +1,5 @@
+inventory:
+- source: DirectOwners
+  items:
+  - id: dayour@microsoft.com
+  isProduction: false

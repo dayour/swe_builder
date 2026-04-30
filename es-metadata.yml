@@ -1,0 +1,17 @@
+schemaVersion: 1.0.0
+
+providers:
+  - provider: InventoryAsCode
+    version: 1.0.0
+    metadata:
+      isProduction: false
+
+      accountableOwners:
+        directOwners:
+          - kimdennis@microsoft.com
+          - dayour@microsoft.com
+
+      routing:
+        defaultAreaPath:
+          org: powercatteam
+          path: FDE
