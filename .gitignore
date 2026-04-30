@@ -118,5 +118,7 @@ temp/
 Build-Guides/
 learnings/
 !knowledge/learnings/
-docs/
 scripts/
+
+# Note: docs/ is the GitHub Pages source and IS tracked.
+# Local working notes should go in Build-Guides/ or scripts/ instead.
